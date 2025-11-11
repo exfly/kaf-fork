@@ -138,6 +138,10 @@ var consumeCmd = &cobra.Command{
 			headerFilter[parts[0]] = parts[1]
 		}
 
+		if tail > 0 && groupFlag != "" {
+			errorExit("--tail not working as Consumer Group group: %s tail: %s", groupFlag, tail)
+		}
+
 		if groupFlag != "" {
 			withConsumerGroup(cmd.Context(), client, topic, groupFlag)
 		} else {
